@@ -64,23 +64,27 @@ DB_PORT=5432
 В каталоге проекта есть шаблон файла .env
 
 ## Шаг 5. Применение миграций
-1. Из каталога проекта lms выполнить команду
+1. Выполнить команду
 ```bash
 python manage.py migrate
 ```
 
 ## Шаг 6. Загрузка данных с помощью фикстур
-1. Загрузка данных пользователей
+1. Загрузка данных изображений
 ```bash
-python manage.py loaddata user_data.json
+python manage.py loaddata image_data.json
 ```
 2. Загрузка данных курсов и уроков
 ```bash
 python manage.py loaddata course_data.json
 ```
+3. Загрузка данных пользователей
+```bash
+python manage.py loaddata user_data.json
+```
 
 ## Шаг 7. Запуск сервера Django
-1. Из каталога проекта lms запустить сервер
+1. Запустить сервер
 ```bash
 python manage.py runserver
 ```

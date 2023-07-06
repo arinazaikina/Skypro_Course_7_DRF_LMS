@@ -18,10 +18,7 @@ class BaseImageViewSet(viewsets.ModelViewSet):
 
     def destroy(self, request: Request, *args, **kwargs) -> Response:
         """
-        Переопределенный метод для удаления объекта.
         Удалить дефолтное изображение (pk = 1) нельзя.
-
-        :param request: Запрос
         """
         instance = self.get_object()
         if instance.id == 1:
@@ -31,18 +28,15 @@ class BaseImageViewSet(viewsets.ModelViewSet):
 
 
 class LessonImageViewSet(BaseImageViewSet):
-    """ViewSet для модели LessonImage"""
     queryset = LessonImage.get_all_lesson_images()
     serializer_class = LessonImageSerializer
 
 
 class CourseImageViewSet(BaseImageViewSet):
-    """ViewSet для модели CourseImage"""
     queryset = CourseImage.get_all_course_images()
     serializer_class = CourseImageSerializer
 
 
 class UserImageViewSet(BaseImageViewSet):
-    """ViewSet для модели UserImage"""
     queryset = UserImage.get_all_user_images()
     serializer_class = UserImageSerializer

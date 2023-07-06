@@ -12,22 +12,11 @@ from .serializers import CustomUserSerializer, PaymentSerializer
 
 
 class CustomUserViewSet(viewsets.ModelViewSet):
-    """ViewSet для модели CustomUser"""
     queryset = CustomUser.objects.all()
     serializer_class = CustomUserSerializer
 
 
 class PaymentListCreateView(generics.ListCreateAPIView):
-    """
-    Обобщенное представление для списка и создания платежей.
-
-    Attrs:
-        - queryset: QuerySet, содержащий все платежи.
-        - serializer_class: Класс сериализатора для модели Payment.
-        - filter_backends: Список классов фильтров и сортировки.
-        - filterset_class: Класс фильтров для модели Payment.
-        - ordering_fields: Список полей, по которым можно проводить сортировку.
-    """
     queryset = Payment.get_all_payments()
     serializer_class = PaymentSerializer
     filter_backends = [DjangoFilterBackend, OrderingFilter]
@@ -41,14 +30,9 @@ class PaymentListCreateView(generics.ListCreateAPIView):
         openapi.Parameter('ordering', openapi.IN_QUERY, description="Сортировка по дате", type=openapi.TYPE_STRING),
     ])
     def list(self, request: Request, *args, **kwargs) -> Response:
-        """
-        Переопределенный метод для получения списка платежей.
-        :param request: Запрос.
-        """
         return super().list(request, *args, **kwargs)
 
 
 class PaymentRetrieveView(generics.RetrieveAPIView):
-    """Обобщенное представление для получения деталей платежа"""
     queryset = Payment.get_all_payments()
     serializer_class = PaymentSerializer
