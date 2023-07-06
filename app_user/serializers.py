@@ -60,6 +60,8 @@ class CustomUserSerializer(serializers.ModelSerializer):
 
     Настроена проверка номера телефона.
     Телефонный номер должен быть в формате: +7(9**)***-**-**
+
+    Поле avatar не является обязательным для заполнения.
     """
     phone_regex = RegexValidator(
         regex=r'^\+7\(9\d{2}\)\d{3}-\d{2}-\d{2}$',
@@ -68,8 +70,7 @@ class CustomUserSerializer(serializers.ModelSerializer):
     phone = serializers.CharField(validators=[phone_regex])
     avatar = serializers.PrimaryKeyRelatedField(
         queryset=UserImage.get_all_user_images(),
-        required=False,
-        default=UserImage.get_all_user_images().first()
+        required=False
     )
     payments = PaymentSerializer(many=True, read_only=True)
 

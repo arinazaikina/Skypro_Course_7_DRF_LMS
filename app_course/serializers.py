@@ -20,15 +20,13 @@ class LessonSerializer(serializers.ModelSerializer):
     - video_url: Строка с URL-адресом видео урока.
     - course: Идентификатор курса, к которому принадлежит урок.
 
-    Поле preview не является обязательным для заполнения (по умолчанию preview = 1 -
-    дефолтное изображение).
+    Поле preview не является обязательным для заполнения.
 
     Поле name проверяется на уникальность.
     """
     preview = serializers.PrimaryKeyRelatedField(
         queryset=LessonImage.get_all_lesson_images(),
-        required=False,
-        default=LessonImage.get_all_lesson_images().first()
+        required=False
     )
 
     name = serializers.CharField(
@@ -63,15 +61,13 @@ class CourseSerializer(serializers.ModelSerializer):
     - lessons: Список уроков, относящихся к курсу (ссылки на модель Lesson).
     - lessons_count: Количество уроков в курсе.
 
-    Поле preview не является обязательным для заполнения (по умолчанию preview = 1 -
-    дефолтное изображение).
+    Поле preview не является обязательным для заполнения.
 
     Поле name проверяется на уникальность.
     """
     preview = serializers.PrimaryKeyRelatedField(
         queryset=CourseImage.get_all_course_images(),
-        required=False,
-        default=CourseImage.get_all_course_images().first()
+        required=False
     )
     name = serializers.CharField(
         validators=[UniqueValidator(queryset=Course.get_all_courses())]
