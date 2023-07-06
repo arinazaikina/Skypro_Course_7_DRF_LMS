@@ -1,0 +1,51 @@
+[
+{
+    "model": "app_image.lessonimage",
+    "pk": 1,
+    "fields": {
+        "image": "lessons/default.png"
+    }
+},
+{
+    "model": "app_image.courseimage",
+    "pk": 1,
+    "fields": {
+        "image": "courses/default.png"
+    }
+},
+{
+    "model": "app_image.courseimage",
+    "pk": 5,
+    "fields": {
+        "image": "courses/python.webp"
+    }
+},
+{
+    "model": "app_image.courseimage",
+    "pk": 6,
+    "fields": {
+        "image": "courses/java.webp"
+    }
+},
+{
+    "model": "app_image.courseimage",
+    "pk": 7,
+    "fields": {
+        "image": "courses/qa.webp"
+    }
+},
+{
+    "model": "app_image.userimage",
+    "pk": 1,
+    "fields": {
+        "image": "users/default.png"
+    }
+},
+{
+    "model": "app_image.userimage",
+    "pk": 2,
+    "fields": {
+        "image": "users/i-226-1.jpeg"
+    }
+}
+]
