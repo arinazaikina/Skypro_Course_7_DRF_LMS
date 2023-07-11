@@ -11,7 +11,7 @@ git clone https://github.com/arinazaikina/Skypro_Course_7_DRF_LMS.git
 ```bash
 cd Skypro_Course_7_DRF_LMS
 ```
-4. Переклчюить ветку
+4. Переключить ветку
 ```bash
 git checkout 25.1
 ```
