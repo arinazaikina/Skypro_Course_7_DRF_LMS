@@ -13,6 +13,8 @@ class Course(models.Model):
     preview = models.ForeignKey(CourseImage, on_delete=models.SET_DEFAULT, default=1, related_name='courses',
                                 verbose_name='Превью')
     description = models.TextField(verbose_name='Описание')
+    created_by = models.ForeignKey('app_user.CustomUser', on_delete=models.CASCADE,
+                                   verbose_name='Создано пользователем')
 
     class Meta:
         verbose_name = 'Курс'
@@ -40,6 +42,8 @@ class Lesson(models.Model):
     preview = models.ForeignKey(LessonImage, on_delete=models.SET_DEFAULT, default=1, related_name='lessons',
                                 verbose_name='Превью')
     video_url = models.URLField(verbose_name='Ссылка на видео')
+    created_by = models.ForeignKey('app_user.CustomUser', on_delete=models.CASCADE,
+                                   verbose_name='Создано пользователем')
 
     class Meta:
         verbose_name = "Урок"

@@ -1,95 +1,68 @@
 [
 {
     "model": "app_course.course",
-    "pk": 1,
+    "pk": 2,
     "fields": {
         "name": "Python-разработчик",
-        "preview": 5,
-        "description": "Python просто выучить, даже если вы никогда не программировали. Во время обучения вам будет помогать эксперт-куратор. Вы разработаете 3 проекта для портфолио, а Центр карьеры поможет найти работу Python-разработчиком."
-    }
-},
-{
-    "model": "app_course.course",
-    "pk": 2,
-    "fields": {
-        "name": "Java-разработчик",
-        "preview": 6,
-        "description": "Вы с нуля научитесь программировать на языке Java и создавать веб-приложения на фреймворке Spring. За полгода получите фундаментальные навыки и соберёте портфолио, а мы поможем найти работу."
+        "preview": 1,
+        "description": "Python просто выучить, даже если вы никогда не программировали. Во время обучения вам будет помогать эксперт-куратор. Вы разработаете 3 проекта для портфолио, а Центр карьеры поможет найти работу Python-разработчиком.",
+        "created_by": 2
     }
 },
 {
     "model": "app_course.course",
     "pk": 3,
     "fields": {
+        "name": "Java-разработчик",
+        "preview": 1,
+        "description": "Вы с нуля научитесь программировать на языке Java и создавать веб-приложения на фреймворке Spring. За полгода получите фундаментальные навыки и соберёте портфолио, а мы поможем найти работу.",
+        "created_by": 2
+    }
+},
+{
+    "model": "app_course.course",
+    "pk": 4,
+    "fields": {
         "name": "Инженер по тестированию",
-        "preview": 7,
-        "description": "Вы научитесь находить ошибки в работе сайтов и приложений с помощью Java, JavaScript или Python. С первого занятия погрузитесь в практику и сможете начать зарабатывать уже через 4 месяца."
+        "preview": 3,
+        "description": "string",
+        "created_by": 4
     }
 },
 {
     "model": "app_course.lesson",
     "pk": 1,
     "fields": {
-        "course": 1,
-        "name": "Пишем интерфейс мессенджера на Python",
-        "description": "Пишем интерфейс мессенджера на Python",
-        "preview": 1,
-        "video_url": "https://live.skillbox.ru/webinars/code/pishem-interfeis-messendzhera-na-python060523/"
+        "course": 2,
+        "name": "Знакомимся с Python",
+        "description": "Знакомимся с Python",
+        "preview": 2,
+        "video_url": "https://live.skillbox.ru/webinars/code/znakomimsya-s-python040523/",
+        "created_by": 2
     }
 },
 {
     "model": "app_course.lesson",
     "pk": 2,
     "fields": {
-        "course": 1,
-        "name": "Знакомимся с Python",
-        "description": "Вы изучите основы разработки на Python и создадите программу для обмена сообщениями.",
+        "course": 4,
+        "name": "Тестирование мобильного приложения",
+        "description": "Тестирование мобильного приложения",
         "preview": 1,
-        "video_url": "https://live.skillbox.ru/webinars/code/znakomimsya-s-python051222/"
-    }
-},
-{
-    "model": "app_course.lesson",
-    "pk": 3,
-    "fields": {
-        "course": 3,
-        "name": "Ручное тестирование сайта",
-        "description": "Ручное тестирование сайта",
-        "preview": 1,
-        "video_url": "https://live.skillbox.ru/webinars/code/ruchnoe-testirovanie-sayta-1/"
+        "video_url": "https://live.skillbox.ru/webinars/code/testirovanie-mobilnogo-prilozheniya-podvodim-itogi070821/",
+        "created_by": 4
     }
 },
 {
     "model": "app_course.lesson",
     "pk": 4,
     "fields": {
-        "course": 3,
-        "name": "Автоматизированное тестирование с нуля",
-        "description": "Автоматизированное тестирование с нуля",
+        "course": 4,
+        "name": "Автоматизируем процесс тестирования",
+        "description": "Автоматизируем процесс тестирования",
         "preview": 1,
-        "video_url": "https://live.skillbox.ru/webinars/code/avtomatizirovannoe-testirovanie-s-nulya-1/"
-    }
-},
-{
-    "model": "app_course.lesson",
-    "pk": 5,
-    "fields": {
-        "course": 3,
-        "name": "Тестирование мобильного приложения",
-        "description": "Тестирование мобильного приложения",
-        "preview": 1,
-        "video_url": "https://live.skillbox.ru/webinars/code/testirovanie-mobilnogo-prilozheniya-podvodim-itogi070821/"
-    }
-},
-{
-    "model": "app_course.lesson",
-    "pk": 6,
-    "fields": {
-        "course": 2,
-        "name": "Знакомимся с Java и продумываем логику Telegram-бота",
-        "description": "Знакомимся с Java и продумываем логику Telegram-бота",
-        "preview": 1,
-        "video_url": "https://live.skillbox.ru/webinars/code/znakomimsya-s-java-i-produmyvaem-logiku-telegram-bota220623/"
+        "video_url": "https://live.skillbox.ru/webinars/code/avtomatiziruem-process-testirovaniya080722/",
+        "created_by": 2
     }
 }
 ]

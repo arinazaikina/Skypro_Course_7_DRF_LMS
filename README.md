@@ -11,6 +11,10 @@ git clone https://github.com/arinazaikina/Skypro_Course_7_DRF_LMS.git
 ```bash
 cd Skypro_Course_7_DRF_LMS
 ```
+4. Переклчюить ветку
+```bash
+git checkout 25.1
+```
 
 ## Шаг 2. Установка зависимостей
 1. Убедиться, что в системе установлен Python3.x. 
