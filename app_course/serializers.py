@@ -19,6 +19,7 @@ class LessonSerializer(serializers.ModelSerializer):
     - preview: Идентификатор превью урока (ссылка на модель LessonImage).
     - video_url: Строка с URL-адресом видео урока.
     - course: Идентификатор курса, к которому принадлежит урок.
+    - created_by: ID и почта создателя урока (ссылка на модель CustomUser).
 
     Поле preview не является обязательным для заполнения.
 
@@ -32,10 +33,11 @@ class LessonSerializer(serializers.ModelSerializer):
     name = serializers.CharField(
         validators=[UniqueValidator(queryset=Lesson.get_all_lessons())]
     )
+    created_by = serializers.SerializerMethodField()
 
     class Meta:
         model = Lesson
-        fields = ['id', 'name', 'description', 'preview', 'video_url', 'course']
+        fields = ['id', 'name', 'description', 'preview', 'video_url', 'course', 'created_by']
 
     def to_representation(self, instance: Lesson) -> Dict[str, Any]:
         """
@@ -47,6 +49,19 @@ class LessonSerializer(serializers.ModelSerializer):
         lesson_output = super().to_representation(instance)
         lesson_output['preview'] = LessonImageSerializer(instance.preview).data
         return lesson_output
+
+    @staticmethod
+    def get_created_by(instance: Lesson) -> Dict[str, Any]:
+        """
+        Возвращает информацию о создателе урока (ID пользователя и почту).
+
+        :param instance: Экземпляр модели Lesson.
+        """
+        created_by = instance.created_by
+        return {
+            'id': created_by.id,
+            'email': created_by.email
+        }
 
 
 class CourseSerializer(serializers.ModelSerializer):
@@ -60,6 +75,7 @@ class CourseSerializer(serializers.ModelSerializer):
     - description: Строка с описанием курса.
     - lessons: Список уроков, относящихся к курсу (ссылки на модель Lesson).
     - lessons_count: Количество уроков в курсе.
+    - created_by: ID и почта создателя курса (ссылка на модель CustomUser).
 
     Поле preview не является обязательным для заполнения.
 
@@ -74,10 +90,11 @@ class CourseSerializer(serializers.ModelSerializer):
     )
     lessons = LessonSerializer(many=True, read_only=True)
     lessons_count = serializers.SerializerMethodField()
+    created_by = serializers.SerializerMethodField()
 
     class Meta:
         model = Course
-        fields = ['id', 'name', 'preview', 'description', 'lessons', 'lessons_count']
+        fields = ['id', 'name', 'preview', 'description', 'lessons', 'lessons_count', 'created_by']
 
     def to_representation(self, instance: Course) -> Dict[str, Any]:
         """
@@ -98,3 +115,16 @@ class CourseSerializer(serializers.ModelSerializer):
         :param instance: Экземпляр модели Course.
         """
         return instance.lessons.count()
+
+    @staticmethod
+    def get_created_by(instance: Course) -> Dict[str, Any]:
+        """
+        Возвращает информацию о создателе курса (ID пользователя и почту).
+
+        :param instance: Экземпляр модели Course.
+        """
+        created_by = instance.created_by
+        return {
+            'id': created_by.id,
+            'email': created_by.email
+        }
