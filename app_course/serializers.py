@@ -5,7 +5,7 @@ from rest_framework.validators import UniqueValidator
 
 from app_image.models import CourseImage, LessonImage
 from app_image.serializers import CourseImageSerializer, LessonImageSerializer
-from .models import Course, Lesson
+from .models import Course, Lesson, CourseSubscription
 from .validators import YouTubeUrlValidator
 
 
@@ -78,6 +78,7 @@ class CourseSerializer(serializers.ModelSerializer):
     - lessons: Список уроков, относящихся к курсу (ссылки на модель Lesson).
     - lessons_count: Количество уроков в курсе.
     - created_by: ID и почта создателя курса (ссылка на модель CustomUser).
+    - subscribed: Флаг подписки текущего пользователя на курс.
 
     Поле preview не является обязательным для заполнения.
 
@@ -93,10 +94,11 @@ class CourseSerializer(serializers.ModelSerializer):
     lessons = LessonSerializer(many=True, read_only=True)
     lessons_count = serializers.SerializerMethodField()
     created_by = serializers.SerializerMethodField()
+    subscribed = serializers.SerializerMethodField()
 
     class Meta:
         model = Course
-        fields = ['id', 'name', 'preview', 'description', 'lessons', 'lessons_count', 'created_by']
+        fields = ['id', 'name', 'preview', 'description', 'lessons', 'lessons_count', 'created_by', 'subscribed']
 
     def to_representation(self, instance: Course) -> Dict[str, Any]:
         """
@@ -130,3 +132,162 @@ class CourseSerializer(serializers.ModelSerializer):
             'id': created_by.id,
             'email': created_by.email
         }
+
+    def get_subscribed(self, instance: Course) -> bool:
+        """
+        Возвращает флаг подписки текущего пользователя на курс.
+
+        :param instance: Экземпляр модели Course.
+        """
+        request = self.context.get('request')
+        user = request.user
+
+        try:
+            subscription = CourseSubscription.objects.get(user=user, course=instance)
+            return subscription.subscribed
+        except CourseSubscription.DoesNotExist:
+            return False
+
+
+class SubscriptionCreateSerializer(serializers.ModelSerializer):
+    """
+    Сериализатор для создания подписки на курс.
+
+    Поля:
+    - course: ID курса, на который пользователь хочет подписаться.
+    - subscribed: Флаг подписки (только для чтения).
+
+    При попытке создать подписку, проверяет, есть ли уже подписка на данный курс у пользователя.
+    Если подписка уже существует, возбуждает исключение.
+    """
+    subscribed = serializers.BooleanField(read_only=True)
+
+    class Meta:
+        model = CourseSubscription
+        fields = ['course', 'subscribed']
+
+    def validate(self, attrs: Dict[str, Any]) -> Dict[str, Any]:
+        """
+        Проверяет, существует ли уже подписка на указанный курс у текущего пользователя.
+        Если подписка уже есть, будет выброшено исключение.
+
+        :param attrs: Входные данные сериализатора (ID курса, ID пользователя мы получим из запроса,
+        так как пользователь авторизован).
+        """
+        user = self.context['request'].user
+        course = attrs['course']
+        subscription_exists = CourseSubscription.objects.filter(user=user, course=course, subscribed=True).exists()
+
+        if subscription_exists:
+            raise serializers.ValidationError(f"Подписка на данный курс у пользователя {user} уже существует.")
+
+        return attrs
+
+    def create(self, validated_data: Dict[str, Any]) -> CourseSubscription:
+        """
+        Создает подписку на курс.
+        Возвращает созданный объект подписки.
+
+        :param validated_data: Проверенные данные сериализатора.
+        """
+        user = self.context['request'].user
+        course = validated_data['course']
+
+        subscription, _ = CourseSubscription.objects.update_or_create(
+            user=user,
+            course=course,
+            defaults={'subscribed': True}
+        )
+
+        return subscription
+
+    def to_representation(self, instance: CourseSubscription) -> Dict[str, Any]:
+        """
+        Преобразует объект подписки в словарь с полной информацией
+        и возвращает этот словарь.
+        Информация будет отображена в ответе сервера.
+
+        :param instance: Объект подписки.
+        """
+        rep = super().to_representation(instance)
+        rep['user'] = {
+            'id': instance.user.id,
+            'username': instance.user.email
+        }
+        rep['course'] = {
+            'id': instance.course.id,
+            'name': instance.course.name
+        }
+        return rep
+
+
+class SubscriptionDeleteSerializer(serializers.ModelSerializer):
+    """
+    Сериализатор для отмены подписки на курс.
+
+    Поля:
+    - course: ID курса, для которого пользователь хочет отменить подписку.
+    - subscribed: Флаг подписки (только для чтения).
+
+    При попытке отменить подписку, проверяет, не отменена ли уже эта подписка.
+    Если подписка уже отменена, возбуждает исключение.
+    Если такая подписка не найдена, возбуждает исключение.
+
+    При успешной отмене подписки, обновляет флаг подписки на False.
+    """
+    subscribed = serializers.BooleanField(read_only=True)
+
+    class Meta:
+        model = CourseSubscription
+        fields = ['course', 'subscribed']
+
+    def validate(self, attrs: Dict[str, Any]) -> Dict[str, Any]:
+        """
+        Проверяет, существует ли подписка на данный курс и не отменена ли она уже.
+        Если подписка не существует или уже отменена, возбуждает исключение.
+
+        Если подписка существует и активна, возвращает входные данные сериализатора.
+
+        :param attrs: Входные данные сериализатора.
+        """
+        user = self.context['request'].user
+        course = attrs['course']
+        subscription = CourseSubscription.objects.filter(user=user, course=course).first()
+
+        if not subscription:
+            raise serializers.ValidationError("Подписка на этот курс не найдена.")
+        elif not subscription.subscribed:
+            raise serializers.ValidationError("Подписка на этот курс уже отменена.")
+
+        return attrs
+
+    def update(self, instance: CourseSubscription, validated_data: Dict[str, Any]) -> CourseSubscription:
+        """
+        Обновляет флаг подписки на False и сохраняет изменения.
+        Возвращает обновленный объект подписки.
+
+        :param instance: Объект подписки.
+        :param validated_data: Проверенные данные сериализатора.
+        """
+        instance.subscribed = False
+        instance.save()
+        return instance
+
+    def to_representation(self, instance: CourseSubscription) -> Dict[str, Any]:
+        """
+        Преобразует объект подписки в словарь с полной информацией
+        и возвращает этот словарь.
+        Информация будет отображена в ответе сервера.
+
+        :param instance: Объект подписки.
+        """
+        response = super().to_representation(instance)
+        response['user'] = {
+            'id': instance.user.id,
+            'username': instance.user.email,
+        }
+        response['course'] = {
+            'id': instance.course.id,
+            'name': instance.course.name,
+        }
+        return response

@@ -59,3 +59,28 @@ class Lesson(models.Model):
         Возвращает список всех уроков
         """
         return cls.objects.all()
+
+
+class CourseSubscription(models.Model):
+    """
+    Модель, описывающая подписку пользователя на курс.
+    """
+    user = models.ForeignKey('app_user.CustomUser', on_delete=models.CASCADE, verbose_name='Пользователь')
+    course = models.ForeignKey(Course, on_delete=models.CASCADE, verbose_name='Курс')
+    subscribed = models.BooleanField(default=False, verbose_name='Статус подписки')
+
+    class Meta:
+        unique_together = ('user', 'course')
+        verbose_name = "Подписка"
+        verbose_name_plural = "Подписки"
+        db_table = 'course_subscriptions'
+
+    def __str__(self):
+        return f'{self.user} {self.course.name} {self.subscribed}'
+
+    @classmethod
+    def get_all_course_subscriptions(cls) -> List['Lesson']:
+        """
+        Возвращает список всех подписок на курс
+        """
+        return cls.objects.all()
