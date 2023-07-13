@@ -1,22 +1,41 @@
 from typing import Dict, Any
 
 from django.http import Http404
+from drf_yasg import openapi
+from drf_yasg.utils import swagger_auto_schema
 from rest_framework import viewsets, generics
 from rest_framework.permissions import IsAuthenticated
 from rest_framework.serializers import Serializer
 
 from .models import Course, Lesson, CourseSubscription
+from .paginations import Pagination
 from .permissions import CustomPermission
 from .serializers import (
     CourseSerializer,
     LessonSerializer,
-    SubscriptionCreateSerializer, SubscriptionDeleteSerializer
+    SubscriptionCreateSerializer,
+    SubscriptionDeleteSerializer
 )
 
 
 class CourseViewSet(viewsets.ModelViewSet):
     serializer_class = CourseSerializer
     permission_classes = [IsAuthenticated, CustomPermission]
+    pagination_class = Pagination
+
+    @swagger_auto_schema(
+        manual_parameters=[
+            openapi.Parameter(
+                'page',
+                openapi.IN_QUERY,
+                description='Номер страницы',
+                type=openapi.TYPE_INTEGER
+            )
+        ],
+        responses={200: CourseSerializer(many=True)}
+    )
+    def list(self, request):
+        return super().list(request)
 
     def get_queryset(self):
         """
@@ -61,6 +80,21 @@ class LessonListCreateAPIView(generics.ListCreateAPIView):
     queryset = Lesson.get_all_lessons()
     serializer_class = LessonSerializer
     permission_classes = [IsAuthenticated, CustomPermission]
+    pagination_class = Pagination
+
+    @swagger_auto_schema(
+        manual_parameters=[
+            openapi.Parameter(
+                'page',
+                openapi.IN_QUERY,
+                description='Номер страницы',
+                type=openapi.TYPE_INTEGER
+            )
+        ],
+        responses={200: LessonSerializer(many=True)}
+    )
+    def list(self, request):
+        return super().list(request)
 
     def get_queryset(self):
         """
