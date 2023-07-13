@@ -6,6 +6,7 @@ from rest_framework.validators import UniqueValidator
 from app_image.models import CourseImage, LessonImage
 from app_image.serializers import CourseImageSerializer, LessonImageSerializer
 from .models import Course, Lesson
+from .validators import YouTubeUrlValidator
 
 
 class LessonSerializer(serializers.ModelSerializer):
@@ -22,8 +23,8 @@ class LessonSerializer(serializers.ModelSerializer):
     - created_by: ID и почта создателя урока (ссылка на модель CustomUser).
 
     Поле preview не является обязательным для заполнения.
-
     Поле name проверяется на уникальность.
+    Поле video_url принимает только ссылки на YouTube.
     """
     preview = serializers.PrimaryKeyRelatedField(
         queryset=LessonImage.get_all_lesson_images(),
@@ -38,6 +39,7 @@ class LessonSerializer(serializers.ModelSerializer):
     class Meta:
         model = Lesson
         fields = ['id', 'name', 'description', 'preview', 'video_url', 'course', 'created_by']
+        validators = [YouTubeUrlValidator(field='video_url')]
 
     def to_representation(self, instance: Lesson) -> Dict[str, Any]:
         """
