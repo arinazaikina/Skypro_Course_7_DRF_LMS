@@ -20,10 +20,14 @@ class CourseViewSet(viewsets.ModelViewSet):
         которые были созданы этим пользователем.
         """
         user = self.request.user
-        if user.is_staff:
-            return Course.get_all_courses()
+
+        if user.is_authenticated:
+            if user.is_staff:
+                return Course.get_all_courses()
+            else:
+                return Course.get_all_courses().filter(created_by=user)
         else:
-            return Course.get_all_courses().filter(created_by=user)
+            return Course.objects.none()
 
     def perform_create(self, serializer: Serializer) -> None:
         """
@@ -49,10 +53,14 @@ class LessonListCreateAPIView(generics.ListCreateAPIView):
         которые были созданы этим пользователем.
         """
         user = self.request.user
-        if user.is_staff:
-            return Lesson.get_all_lessons()
+
+        if user.is_authenticated:
+            if user.is_staff:
+                return Lesson.get_all_lessons()
+            else:
+                return Lesson.get_all_lessons().filter(created_by=user)
         else:
-            return Lesson.get_all_lessons().filter(created_by=user)
+            return Lesson.objects.none()
 
     def perform_create(self, serializer: Serializer) -> None:
         """
