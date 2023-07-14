@@ -1,0 +1,834 @@
+[
+{
+    "model": "auth.permission",
+    "pk": 1,
+    "fields": {
+        "name": "Can add log entry",
+        "content_type": 1,
+        "codename": "add_logentry"
+    }
+},
+{
+    "model": "auth.permission",
+    "pk": 2,
+    "fields": {
+        "name": "Can change log entry",
+        "content_type": 1,
+        "codename": "change_logentry"
+    }
+},
+{
+    "model": "auth.permission",
+    "pk": 3,
+    "fields": {
+        "name": "Can delete log entry",
+        "content_type": 1,
+        "codename": "delete_logentry"
+    }
+},
+{
+    "model": "auth.permission",
+    "pk": 4,
+    "fields": {
+        "name": "Can view log entry",
+        "content_type": 1,
+        "codename": "view_logentry"
+    }
+},
+{
+    "model": "auth.permission",
+    "pk": 5,
+    "fields": {
+        "name": "Can add permission",
+        "content_type": 2,
+        "codename": "add_permission"
+    }
+},
+{
+    "model": "auth.permission",
+    "pk": 6,
+    "fields": {
+        "name": "Can change permission",
+        "content_type": 2,
+        "codename": "change_permission"
+    }
+},
+{
+    "model": "auth.permission",
+    "pk": 7,
+    "fields": {
+        "name": "Can delete permission",
+        "content_type": 2,
+        "codename": "delete_permission"
+    }
+},
+{
+    "model": "auth.permission",
+    "pk": 8,
+    "fields": {
+        "name": "Can view permission",
+        "content_type": 2,
+        "codename": "view_permission"
+    }
+},
+{
+    "model": "auth.permission",
+    "pk": 9,
+    "fields": {
+        "name": "Can add group",
+        "content_type": 3,
+        "codename": "add_group"
+    }
+},
+{
+    "model": "auth.permission",
+    "pk": 10,
+    "fields": {
+        "name": "Can change group",
+        "content_type": 3,
+        "codename": "change_group"
+    }
+},
+{
+    "model": "auth.permission",
+    "pk": 11,
+    "fields": {
+        "name": "Can delete group",
+        "content_type": 3,
+        "codename": "delete_group"
+    }
+},
+{
+    "model": "auth.permission",
+    "pk": 12,
+    "fields": {
+        "name": "Can view group",
+        "content_type": 3,
+        "codename": "view_group"
+    }
+},
+{
+    "model": "auth.permission",
+    "pk": 13,
+    "fields": {
+        "name": "Can add content type",
+        "content_type": 4,
+        "codename": "add_contenttype"
+    }
+},
+{
+    "model": "auth.permission",
+    "pk": 14,
+    "fields": {
+        "name": "Can change content type",
+        "content_type": 4,
+        "codename": "change_contenttype"
+    }
+},
+{
+    "model": "auth.permission",
+    "pk": 15,
+    "fields": {
+        "name": "Can delete content type",
+        "content_type": 4,
+        "codename": "delete_contenttype"
+    }
+},
+{
+    "model": "auth.permission",
+    "pk": 16,
+    "fields": {
+        "name": "Can view content type",
+        "content_type": 4,
+        "codename": "view_contenttype"
+    }
+},
+{
+    "model": "auth.permission",
+    "pk": 17,
+    "fields": {
+        "name": "Can add session",
+        "content_type": 5,
+        "codename": "add_session"
+    }
+},
+{
+    "model": "auth.permission",
+    "pk": 18,
+    "fields": {
+        "name": "Can change session",
+        "content_type": 5,
+        "codename": "change_session"
+    }
+},
+{
+    "model": "auth.permission",
+    "pk": 19,
+    "fields": {
+        "name": "Can delete session",
+        "content_type": 5,
+        "codename": "delete_session"
+    }
+},
+{
+    "model": "auth.permission",
+    "pk": 20,
+    "fields": {
+        "name": "Can view session",
+        "content_type": 5,
+        "codename": "view_session"
+    }
+},
+{
+    "model": "auth.permission",
+    "pk": 21,
+    "fields": {
+        "name": "Can add Изображение курса",
+        "content_type": 6,
+        "codename": "add_courseimage"
+    }
+},
+{
+    "model": "auth.permission",
+    "pk": 22,
+    "fields": {
+        "name": "Can change Изображение курса",
+        "content_type": 6,
+        "codename": "change_courseimage"
+    }
+},
+{
+    "model": "auth.permission",
+    "pk": 23,
+    "fields": {
+        "name": "Can delete Изображение курса",
+        "content_type": 6,
+        "codename": "delete_courseimage"
+    }
+},
+{
+    "model": "auth.permission",
+    "pk": 24,
+    "fields": {
+        "name": "Can view Изображение курса",
+        "content_type": 6,
+        "codename": "view_courseimage"
+    }
+},
+{
+    "model": "auth.permission",
+    "pk": 25,
+    "fields": {
+        "name": "Can add Изображение урока",
+        "content_type": 7,
+        "codename": "add_lessonimage"
+    }
+},
+{
+    "model": "auth.permission",
+    "pk": 26,
+    "fields": {
+        "name": "Can change Изображение урока",
+        "content_type": 7,
+        "codename": "change_lessonimage"
+    }
+},
+{
+    "model": "auth.permission",
+    "pk": 27,
+    "fields": {
+        "name": "Can delete Изображение урока",
+        "content_type": 7,
+        "codename": "delete_lessonimage"
+    }
+},
+{
+    "model": "auth.permission",
+    "pk": 28,
+    "fields": {
+        "name": "Can view Изображение урока",
+        "content_type": 7,
+        "codename": "view_lessonimage"
+    }
+},
+{
+    "model": "auth.permission",
+    "pk": 29,
+    "fields": {
+        "name": "Can add Изображение пользователя",
+        "content_type": 8,
+        "codename": "add_userimage"
+    }
+},
+{
+    "model": "auth.permission",
+    "pk": 30,
+    "fields": {
+        "name": "Can change Изображение пользователя",
+        "content_type": 8,
+        "codename": "change_userimage"
+    }
+},
+{
+    "model": "auth.permission",
+    "pk": 31,
+    "fields": {
+        "name": "Can delete Изображение пользователя",
+        "content_type": 8,
+        "codename": "delete_userimage"
+    }
+},
+{
+    "model": "auth.permission",
+    "pk": 32,
+    "fields": {
+        "name": "Can view Изображение пользователя",
+        "content_type": 8,
+        "codename": "view_userimage"
+    }
+},
+{
+    "model": "auth.permission",
+    "pk": 33,
+    "fields": {
+        "name": "Can add Курс",
+        "content_type": 9,
+        "codename": "add_course"
+    }
+},
+{
+    "model": "auth.permission",
+    "pk": 34,
+    "fields": {
+        "name": "Can change Курс",
+        "content_type": 9,
+        "codename": "change_course"
+    }
+},
+{
+    "model": "auth.permission",
+    "pk": 35,
+    "fields": {
+        "name": "Can delete Курс",
+        "content_type": 9,
+        "codename": "delete_course"
+    }
+},
+{
+    "model": "auth.permission",
+    "pk": 36,
+    "fields": {
+        "name": "Can view Курс",
+        "content_type": 9,
+        "codename": "view_course"
+    }
+},
+{
+    "model": "auth.permission",
+    "pk": 37,
+    "fields": {
+        "name": "Can add Урок",
+        "content_type": 10,
+        "codename": "add_lesson"
+    }
+},
+{
+    "model": "auth.permission",
+    "pk": 38,
+    "fields": {
+        "name": "Can change Урок",
+        "content_type": 10,
+        "codename": "change_lesson"
+    }
+},
+{
+    "model": "auth.permission",
+    "pk": 39,
+    "fields": {
+        "name": "Can delete Урок",
+        "content_type": 10,
+        "codename": "delete_lesson"
+    }
+},
+{
+    "model": "auth.permission",
+    "pk": 40,
+    "fields": {
+        "name": "Can view Урок",
+        "content_type": 10,
+        "codename": "view_lesson"
+    }
+},
+{
+    "model": "auth.permission",
+    "pk": 41,
+    "fields": {
+        "name": "Can add Пользователь",
+        "content_type": 11,
+        "codename": "add_customuser"
+    }
+},
+{
+    "model": "auth.permission",
+    "pk": 42,
+    "fields": {
+        "name": "Can change Пользователь",
+        "content_type": 11,
+        "codename": "change_customuser"
+    }
+},
+{
+    "model": "auth.permission",
+    "pk": 43,
+    "fields": {
+        "name": "Can delete Пользователь",
+        "content_type": 11,
+        "codename": "delete_customuser"
+    }
+},
+{
+    "model": "auth.permission",
+    "pk": 44,
+    "fields": {
+        "name": "Can view Пользователь",
+        "content_type": 11,
+        "codename": "view_customuser"
+    }
+},
+{
+    "model": "auth.permission",
+    "pk": 45,
+    "fields": {
+        "name": "Can add Платеж",
+        "content_type": 12,
+        "codename": "add_payment"
+    }
+},
+{
+    "model": "auth.permission",
+    "pk": 46,
+    "fields": {
+        "name": "Can change Платеж",
+        "content_type": 12,
+        "codename": "change_payment"
+    }
+},
+{
+    "model": "auth.permission",
+    "pk": 47,
+    "fields": {
+        "name": "Can delete Платеж",
+        "content_type": 12,
+        "codename": "delete_payment"
+    }
+},
+{
+    "model": "auth.permission",
+    "pk": 48,
+    "fields": {
+        "name": "Can view Платеж",
+        "content_type": 12,
+        "codename": "view_payment"
+    }
+},
+{
+    "model": "auth.permission",
+    "pk": 49,
+    "fields": {
+        "name": "Can add Подписка",
+        "content_type": 13,
+        "codename": "add_coursesubscription"
+    }
+},
+{
+    "model": "auth.permission",
+    "pk": 50,
+    "fields": {
+        "name": "Can change Подписка",
+        "content_type": 13,
+        "codename": "change_coursesubscription"
+    }
+},
+{
+    "model": "auth.permission",
+    "pk": 51,
+    "fields": {
+        "name": "Can delete Подписка",
+        "content_type": 13,
+        "codename": "delete_coursesubscription"
+    }
+},
+{
+    "model": "auth.permission",
+    "pk": 52,
+    "fields": {
+        "name": "Can view Подписка",
+        "content_type": 13,
+        "codename": "view_coursesubscription"
+    }
+},
+{
+    "model": "contenttypes.contenttype",
+    "pk": 1,
+    "fields": {
+        "app_label": "admin",
+        "model": "logentry"
+    }
+},
+{
+    "model": "contenttypes.contenttype",
+    "pk": 2,
+    "fields": {
+        "app_label": "auth",
+        "model": "permission"
+    }
+},
+{
+    "model": "contenttypes.contenttype",
+    "pk": 3,
+    "fields": {
+        "app_label": "auth",
+        "model": "group"
+    }
+},
+{
+    "model": "contenttypes.contenttype",
+    "pk": 4,
+    "fields": {
+        "app_label": "contenttypes",
+        "model": "contenttype"
+    }
+},
+{
+    "model": "contenttypes.contenttype",
+    "pk": 5,
+    "fields": {
+        "app_label": "sessions",
+        "model": "session"
+    }
+},
+{
+    "model": "contenttypes.contenttype",
+    "pk": 6,
+    "fields": {
+        "app_label": "app_image",
+        "model": "courseimage"
+    }
+},
+{
+    "model": "contenttypes.contenttype",
+    "pk": 7,
+    "fields": {
+        "app_label": "app_image",
+        "model": "lessonimage"
+    }
+},
+{
+    "model": "contenttypes.contenttype",
+    "pk": 8,
+    "fields": {
+        "app_label": "app_image",
+        "model": "userimage"
+    }
+},
+{
+    "model": "contenttypes.contenttype",
+    "pk": 9,
+    "fields": {
+        "app_label": "app_course",
+        "model": "course"
+    }
+},
+{
+    "model": "contenttypes.contenttype",
+    "pk": 10,
+    "fields": {
+        "app_label": "app_course",
+        "model": "lesson"
+    }
+},
+{
+    "model": "contenttypes.contenttype",
+    "pk": 11,
+    "fields": {
+        "app_label": "app_user",
+        "model": "customuser"
+    }
+},
+{
+    "model": "contenttypes.contenttype",
+    "pk": 12,
+    "fields": {
+        "app_label": "app_user",
+        "model": "payment"
+    }
+},
+{
+    "model": "contenttypes.contenttype",
+    "pk": 13,
+    "fields": {
+        "app_label": "app_course",
+        "model": "coursesubscription"
+    }
+},
+{
+    "model": "sessions.session",
+    "pk": "pb0wmejmkuculcxsf5d8d1ekwdig0crb",
+    "fields": {
+        "session_data": ".eJxVjMsOwiAQRf-FtSEMBWZw6d5vIDylaiAp7cr479qkC93ec859Mee3tbpt5MXNiZ2ZZqffLfj4yG0H6e7brfPY27rMge8KP-jg157y83K4fwfVj_qtJSJahVjKlAtEoSBbUCQBSWupaLLCImFUUAKpkoFCNIA2iWiFIcPeH6qkNlY:1qJ648:tdr5YO6ve2YFGndyBV6MBEYT0fNd8fBGgeWbyd2WYaU",
+        "expire_date": "2023-07-25T05:37:36.565Z"
+    }
+},
+{
+    "model": "app_image.lessonimage",
+    "pk": 1,
+    "fields": {
+        "image": "lessons/default.png"
+    }
+},
+{
+    "model": "app_image.lessonimage",
+    "pk": 2,
+    "fields": {
+        "image": "lessons/lesson_p_1.webp"
+    }
+},
+{
+    "model": "app_image.courseimage",
+    "pk": 1,
+    "fields": {
+        "image": "courses/default.png"
+    }
+},
+{
+    "model": "app_image.courseimage",
+    "pk": 2,
+    "fields": {
+        "image": "courses/python_AZdbwpJ.webp"
+    }
+},
+{
+    "model": "app_image.courseimage",
+    "pk": 3,
+    "fields": {
+        "image": "courses/java_ygr2GIg.webp"
+    }
+},
+{
+    "model": "app_image.courseimage",
+    "pk": 4,
+    "fields": {
+        "image": "courses/qa_Lgx9BDE.webp"
+    }
+},
+{
+    "model": "app_image.userimage",
+    "pk": 1,
+    "fields": {
+        "image": "users/default.png"
+    }
+},
+{
+    "model": "app_course.course",
+    "pk": 2,
+    "fields": {
+        "name": "Python-разработчик",
+        "preview": 1,
+        "description": "Python просто выучить, даже если вы никогда не программировали. Во время обучения вам будет помогать эксперт-куратор. Вы разработаете 3 проекта для портфолио, а Центр карьеры поможет найти работу Python-разработчиком.",
+        "created_by": 2
+    }
+},
+{
+    "model": "app_course.course",
+    "pk": 3,
+    "fields": {
+        "name": "Java-разработчик",
+        "preview": 1,
+        "description": "Вы с нуля научитесь программировать на языке Java и создавать веб-приложения на фреймворке Spring. За полгода получите фундаментальные навыки и соберёте портфолио, а мы поможем найти работу.",
+        "created_by": 2
+    }
+},
+{
+    "model": "app_course.course",
+    "pk": 4,
+    "fields": {
+        "name": "Инженер по тестированию",
+        "preview": 3,
+        "description": "string",
+        "created_by": 4
+    }
+},
+{
+    "model": "app_course.lesson",
+    "pk": 1,
+    "fields": {
+        "course": 2,
+        "name": "Знакомимся с Python",
+        "description": "Знакомимся с Python",
+        "preview": 2,
+        "video_url": "https://www.youtube.com/watch?v=kqtD5dpn9C8",
+        "created_by": 2
+    }
+},
+{
+    "model": "app_course.lesson",
+    "pk": 2,
+    "fields": {
+        "course": 4,
+        "name": "Тестирование мобильного приложения",
+        "description": "Тестирование мобильного приложения",
+        "preview": 1,
+        "video_url": "https://www.youtube.com/watch?v=PIupBjDxeps",
+        "created_by": 4
+    }
+},
+{
+    "model": "app_course.lesson",
+    "pk": 4,
+    "fields": {
+        "course": 4,
+        "name": "Автоматизируем процесс тестирования",
+        "description": "Автоматизируем процесс тестирования",
+        "preview": 1,
+        "video_url": "https://www.youtube.com/watch?v=1B6oEy3x6VI",
+        "created_by": 2
+    }
+},
+{
+    "model": "app_course.lesson",
+    "pk": 5,
+    "fields": {
+        "course": 2,
+        "name": "Делаю игру Змейка на Python. Двенадцатый дан.",
+        "description": "Делаю игру Змейка на Python. Двенадцатый дан.",
+        "preview": 1,
+        "video_url": "https://www.youtube.com/watch?v=FTtEF1KDBXo",
+        "created_by": 2
+    }
+},
+{
+    "model": "app_course.coursesubscription",
+    "pk": 10,
+    "fields": {
+        "user": 2,
+        "course": 2,
+        "subscribed": true
+    }
+},
+{
+    "model": "app_user.customuser",
+    "pk": 2,
+    "fields": {
+        "password": "pbkdf2_sha256$600000$SDa0HIMiXX459ZVXvuuYPu$WgXw5ObTUcVYljDiM6nvx9jQpD+bAJcj/Ly6ZGiknGs=",
+        "last_login": null,
+        "is_superuser": false,
+        "first_name": "Arina",
+        "last_name": "Zaikina",
+        "is_staff": false,
+        "is_active": true,
+        "date_joined": "2023-07-10T17:10:36.486Z",
+        "email": "arina@mail.com",
+        "avatar": 1,
+        "phone": "+7(995)915-54-18",
+        "city": "Spb",
+        "groups": [],
+        "user_permissions": []
+    }
+},
+{
+    "model": "app_user.customuser",
+    "pk": 3,
+    "fields": {
+        "password": "pbkdf2_sha256$600000$RZZmA9lCb20ha7KP0d8Ez9$zVtDmkpYUa3B7Wd8vBXB+F3YEbH0dsoi8MnN9oq9NRc=",
+        "last_login": null,
+        "is_superuser": false,
+        "first_name": "Moderator",
+        "last_name": "Moderatorov",
+        "is_staff": true,
+        "is_active": true,
+        "date_joined": "2023-07-10T18:29:16.726Z",
+        "email": "moderator@mail.com",
+        "avatar": 1,
+        "phone": "+7(995)915-54-18",
+        "city": "Moscow",
+        "groups": [],
+        "user_permissions": []
+    }
+},
+{
+    "model": "app_user.customuser",
+    "pk": 4,
+    "fields": {
+        "password": "pbkdf2_sha256$600000$bGWVxNoIEg8HGDY2Pk81t6$bJ6BCfXhbOibl2jvUtBuGPhm4rQdUp1TQQykat3iqyc=",
+        "last_login": null,
+        "is_superuser": false,
+        "first_name": "Max",
+        "last_name": "Maximov",
+        "is_staff": false,
+        "is_active": true,
+        "date_joined": "2023-07-10T19:20:14.009Z",
+        "email": "max@mail.com",
+        "avatar": 1,
+        "phone": "+7(949)589-95-96",
+        "city": "Tomsk",
+        "groups": [],
+        "user_permissions": []
+    }
+},
+{
+    "model": "app_user.customuser",
+    "pk": 5,
+    "fields": {
+        "password": "pbkdf2_sha256$600000$jkeKwoyktwQDCRb0BZrnJv$wZ7qI0ZahPg9GnjVn3YMyZlhws442HW/hjju/2jpsmg=",
+        "last_login": "2023-07-11T05:37:36.562Z",
+        "is_superuser": true,
+        "first_name": "",
+        "last_name": "",
+        "is_staff": true,
+        "is_active": true,
+        "date_joined": "2023-07-11T05:32:51.518Z",
+        "email": "admin@mail.ru",
+        "avatar": 1,
+        "phone": "",
+        "city": "",
+        "groups": [],
+        "user_permissions": []
+    }
+},
+{
+    "model": "app_user.payment",
+    "pk": 1,
+    "fields": {
+        "user": 2,
+        "payment_date": "2023-07-11T05:21:12.077Z",
+        "paid_course": null,
+        "paid_lesson": 1,
+        "amount": "2000.00",
+        "payment_method": "cash"
+    }
+},
+{
+    "model": "app_user.payment",
+    "pk": 2,
+    "fields": {
+        "user": 4,
+        "payment_date": "2023-07-11T05:29:28.715Z",
+        "paid_course": null,
+        "paid_lesson": 2,
+        "amount": "2000.00",
+        "payment_method": "transfer"
+    }
+},
+{
+    "model": "app_user.payment",
+    "pk": 3,
+    "fields": {
+        "user": 2,
+        "payment_date": "2023-07-11T05:51:43.446Z",
+        "paid_course": 3,
+        "paid_lesson": null,
+        "amount": "80000.00",
+        "payment_method": "transfer"
+    }
+}
+]

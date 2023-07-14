@@ -13,7 +13,7 @@ cd Skypro_Course_7_DRF_LMS
 ```
 4. Переключить ветку
 ```bash
-git checkout 25.1
+git checkout 25.2
 ```
 
 ## Шаг 2. Установка зависимостей
@@ -74,17 +74,8 @@ python manage.py migrate
 ```
 
 ## Шаг 6. Загрузка данных с помощью фикстур
-1. Загрузка данных изображений
 ```bash
-python manage.py loaddata image_data.json
-```
-2. Загрузка данных курсов и уроков
-```bash
-python manage.py loaddata course_data.json
-```
-3. Загрузка данных пользователей
-```bash
-python manage.py loaddata user_data.json
+python manage.py loaddata data
 ```
 
 ## Шаг 7. Запуск сервера Django
