@@ -97,13 +97,13 @@ python manage.py runserver
 
 3. Полезные данные
 
-Админ: admin@mail.ru, пароль 0000
-Модератор: moderator@mail.com, пароль qwerty123!
-Пользователь arina@mail.com, пароль qwerty123!
-Пользователь max@mail.com, пароль qwerty123!
+- Админ: admin@mail.ru, пароль 0000
+- Модератор: moderator@mail.com, пароль qwerty123!
+- Пользователь arina@mail.com, пароль qwerty123!
+- Пользователь max@mail.com, пароль qwerty123!
 
 4. Некоторые ручки
-Для регистрации пользователя - /register/
-Для авторизации - /login/
-Подписка на курс - /course-subscriptions/ (тело запроса {"course": id_course})
-Отписка от курса - /course-unsubscribe/ (тело запроса {"course": id_course})
+- Для регистрации пользователя - /register/
+- Для авторизации - /login/
+- Подписка на курс - /course-subscriptions/ (тело запроса {"course": id_course})
+- Отписка от курса - /course-unsubscribe/ (тело запроса {"course": id_course})
