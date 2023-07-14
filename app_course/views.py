@@ -49,9 +49,9 @@ class CourseViewSet(viewsets.ModelViewSet):
 
         if user.is_authenticated:
             if user.is_staff:
-                return Course.get_all_courses()
+                return Course.get_all_courses().order_by('id')
             else:
-                return Course.get_all_courses().filter(created_by=user)
+                return Course.get_all_courses().filter(created_by=user).order_by('id')
         else:
             return Course.objects.none()
 
@@ -108,9 +108,9 @@ class LessonListCreateAPIView(generics.ListCreateAPIView):
 
         if user.is_authenticated:
             if user.is_staff:
-                return Lesson.get_all_lessons()
+                return Lesson.get_all_lessons().order_by('id')
             else:
-                return Lesson.get_all_lessons().filter(created_by=user)
+                return Lesson.get_all_lessons().filter(created_by=user).order_by('id')
         else:
             return Lesson.objects.none()
 

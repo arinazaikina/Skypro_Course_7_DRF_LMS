@@ -21,6 +21,10 @@ class YouTubeUrlValidator:
         :param value: URL для проверки.
         """
         url = value.get(self.field)
+
+        if not url:
+            return
+
         domain_name = urlparse(url).netloc
 
         if "youtube.com" not in domain_name:
