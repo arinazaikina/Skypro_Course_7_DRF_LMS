@@ -74,19 +74,9 @@ python manage.py migrate
 ```
 
 ## Шаг 6. Загрузка данных с помощью фикстур
-1. Загрузка данных изображений
 ```bash
-python manage.py loaddata image_data.json
+python manage.py loaddata data
 ```
-2. Загрузка данных пользователей
-```bash
-python manage.py loaddata user_data.json
-```
-3Загрузка данных курсов и уроков
-```bash
-python manage.py loaddata course_data.json
-```
-
 
 ## Шаг 7. Запуск сервера Django
 1. Запустить сервер
