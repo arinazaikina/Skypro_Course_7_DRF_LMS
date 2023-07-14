@@ -78,9 +78,32 @@ python manage.py migrate
 python manage.py loaddata data
 ```
 
-## Шаг 7. Запуск сервера Django
+## Шаг 7. Запуск тестов
+1. Для запуска тестов выполнить команду
+```bash
+coverage run --source='.' manage.py test
+```
+2. Для просмотра отчета о покрытии выполнить команду
+```bash
+coverage html && xdg-open htmlcov/index.html
+```
+
+## Шаг 8. Запуск сервера Django
 1. Запустить сервер
 ```bash
 python manage.py runserver
 ```
 2. Перейти по адресу http://127.0.0.1:8000/swagger/
+
+3. Полезные данные
+
+Админ: admin@mail.ru, пароль 0000
+Модератор: moderator@mail.com, пароль qwerty123!
+Пользователь arina@mail.com, пароль qwerty123!
+Пользователь max@mail.com, пароль qwerty123!
+
+4. Некоторые ручки
+Для регистрации пользователя - /register/
+Для авторизации - /login/
+Подписка на курс - /course-subscriptions/ (тело запроса {"course": id_course})
+Отписка от курса - /course-unsubscribe/ (тело запроса {"course": id_course})
