@@ -1,13 +1,12 @@
 from typing import Dict, Any
 
 from django.contrib.auth.password_validation import validate_password
-from django.core.validators import RegexValidator
 from rest_framework import serializers
 
 from app_image.models import UserImage
 from app_image.serializers import UserImageSerializer
 from .models import CustomUser, Payment
-
+from .validators import PhoneValidator
 
 class PaymentSerializer(serializers.ModelSerializer):
     """
@@ -129,11 +128,7 @@ class RegisterUserSerializer(serializers.ModelSerializer):
     """
     password = serializers.CharField(write_only=True, required=True, validators=[validate_password])
     password2 = serializers.CharField(write_only=True, required=True)
-    phone_regex = RegexValidator(
-        regex=r'^\+7\(9\d{2}\)\d{3}-\d{2}-\d{2}$',
-        message="Телефонный номер должен быть в формате: +7(9**)***-**-**"
-    )
-    phone = serializers.CharField(validators=[phone_regex])
+    phone = serializers.CharField(validators=[PhoneValidator()])
 
     class Meta:
         model = CustomUser
@@ -151,7 +146,7 @@ class RegisterUserSerializer(serializers.ModelSerializer):
         :param attrs: Входные данные сериализатора.
         """
         if attrs['password'] != attrs['password2']:
-            raise serializers.ValidationError({"password": "Password fields didn't match."})
+            raise serializers.ValidationError({"password": "Пароли не совпадают."})
 
         return attrs
 
