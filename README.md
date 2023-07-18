@@ -98,7 +98,12 @@ python manage.py migrate
 python manage.py loaddata data
 ```
 
-## Шаг 8. Запуск celery
+## Шаг 8. Создание периодической задачи
+```bash
+python manage.py create_periodic_task
+```
+
+## Шаг 9. Запуск celery
 1. Открыть новое окно терминала
 2. Если виртуальное окружение неактивно, активировать его
 ```bash
@@ -109,7 +114,7 @@ source venv/bin/activate
 celery -A config worker --loglevel=info
 ```
 
-## Шаг 9. Запуск celery-beat
+## Шаг 10. Запуск celery-beat
 1. Открыть новое окно терминала
 2. Если виртуальное окружение неактивно, активировать его
 ```bash
@@ -120,7 +125,7 @@ source venv/bin/activate
 celery -A config beat --loglevel=info
 ```
 
-## Шаг 10. Запуск тестов
+## Шаг 11. Запуск тестов
 1. Для запуска тестов выполнить команду в новом окне терминала из каталога проекта Skypro_Course_7_DRF_LMS 
 ```bash
 coverage run --source='.' manage.py test
@@ -130,7 +135,7 @@ coverage run --source='.' manage.py test
 coverage html && xdg-open htmlcov/index.html
 ```
 
-## Шаг 11. Запуск сервера Django
+## Шаг 12. Запуск сервера Django
 1. Запустить сервер
 ```bash
 python manage.py runserver
