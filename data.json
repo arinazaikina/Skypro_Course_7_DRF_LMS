@@ -8,6 +8,89 @@
     }
 },
 {
+    "model": "django_celery_beat.intervalschedule",
+    "pk": 1,
+    "fields": {
+        "every": 5,
+        "period": "seconds"
+    }
+},
+{
+    "model": "django_celery_beat.crontabschedule",
+    "pk": 1,
+    "fields": {
+        "minute": "0",
+        "hour": "4",
+        "day_of_week": "*",
+        "day_of_month": "*",
+        "month_of_year": "*",
+        "timezone": "Europe/Moscow"
+    }
+},
+{
+    "model": "django_celery_beat.periodictasks",
+    "pk": 1,
+    "fields": {
+        "last_update": "2023-07-18T19:22:08.656Z"
+    }
+},
+{
+    "model": "django_celery_beat.periodictask",
+    "pk": 1,
+    "fields": {
+        "name": "Check and Update Payment Status",
+        "task": "app_user.tasks.check_and_update_payment_status",
+        "interval": 1,
+        "crontab": null,
+        "solar": null,
+        "clocked": null,
+        "args": "[]",
+        "kwargs": "{}",
+        "queue": null,
+        "exchange": null,
+        "routing_key": null,
+        "headers": "{}",
+        "priority": null,
+        "expires": null,
+        "expire_seconds": null,
+        "one_off": false,
+        "start_time": "2023-07-18T18:13:07.385Z",
+        "enabled": true,
+        "last_run_at": "2023-07-18T19:23:23.832Z",
+        "total_run_count": 68,
+        "date_changed": "2023-07-18T19:23:27.999Z",
+        "description": ""
+    }
+},
+{
+    "model": "django_celery_beat.periodictask",
+    "pk": 2,
+    "fields": {
+        "name": "celery.backend_cleanup",
+        "task": "celery.backend_cleanup",
+        "interval": null,
+        "crontab": 1,
+        "solar": null,
+        "clocked": null,
+        "args": "[]",
+        "kwargs": "{}",
+        "queue": null,
+        "exchange": null,
+        "routing_key": null,
+        "headers": "{}",
+        "priority": null,
+        "expires": null,
+        "expire_seconds": 43200,
+        "one_off": false,
+        "start_time": null,
+        "enabled": true,
+        "last_run_at": null,
+        "total_run_count": 0,
+        "date_changed": "2023-07-18T19:22:08.656Z",
+        "description": ""
+    }
+},
+{
     "model": "app_image.lessonimage",
     "pk": 1,
     "fields": {
@@ -63,7 +146,8 @@
         "name": "Python-разработчик",
         "preview": 1,
         "description": "Python просто выучить, даже если вы никогда не программировали. Во время обучения вам будет помогать эксперт-куратор. Вы разработаете 3 проекта для портфолио, а Центр карьеры поможет найти работу Python-разработчиком.",
-        "created_by": 2
+        "created_by": 2,
+        "cost": "50000.00"
     }
 },
 {
@@ -73,7 +157,8 @@
         "name": "Java-разработчик",
         "preview": 1,
         "description": "Вы с нуля научитесь программировать на языке Java и создавать веб-приложения на фреймворке Spring. За полгода получите фундаментальные навыки и соберёте портфолио, а мы поможем найти работу.",
-        "created_by": 2
+        "created_by": 2,
+        "cost": "50000.00"
     }
 },
 {
@@ -83,7 +168,8 @@
         "name": "Инженер по тестированию",
         "preview": 3,
         "description": "string",
-        "created_by": 4
+        "created_by": 4,
+        "cost": "50000.00"
     }
 },
 {
@@ -230,9 +316,11 @@
         "user": 2,
         "payment_date": "2023-07-11T05:21:12.077Z",
         "paid_course": null,
-        "paid_lesson": 1,
         "amount": "2000.00",
-        "payment_method": "cash"
+        "payment_method_id": null,
+        "payment_intent_id": null,
+        "status": null,
+        "is_confirmed": false
     }
 },
 {
@@ -242,9 +330,11 @@
         "user": 4,
         "payment_date": "2023-07-11T05:29:28.715Z",
         "paid_course": null,
-        "paid_lesson": 2,
         "amount": "2000.00",
-        "payment_method": "transfer"
+        "payment_method_id": null,
+        "payment_intent_id": null,
+        "status": null,
+        "is_confirmed": false
     }
 },
 {
@@ -254,9 +344,137 @@
         "user": 2,
         "payment_date": "2023-07-11T05:51:43.446Z",
         "paid_course": 3,
-        "paid_lesson": null,
         "amount": "80000.00",
-        "payment_method": "transfer"
+        "payment_method_id": null,
+        "payment_intent_id": null,
+        "status": null,
+        "is_confirmed": false
+    }
+},
+{
+    "model": "app_user.payment",
+    "pk": 4,
+    "fields": {
+        "user": 2,
+        "payment_date": "2023-07-18T07:05:56.172Z",
+        "paid_course": 2,
+        "amount": "50000.00",
+        "payment_method_id": "pm_1NV8YEEZTYLpMdj9QzUFWufx",
+        "payment_intent_id": "pi_3NV7ypEZTYLpMdj90NObLwZt",
+        "status": "succeeded",
+        "is_confirmed": true
+    }
+},
+{
+    "model": "app_user.payment",
+    "pk": 5,
+    "fields": {
+        "user": 2,
+        "payment_date": "2023-07-18T11:41:05.592Z",
+        "paid_course": 2,
+        "amount": "50000.00",
+        "payment_method_id": "pm_1NVG9VEZTYLpMdj9xGwMDsEl",
+        "payment_intent_id": "pi_3NVCH7EZTYLpMdj91GPmcQZa",
+        "status": "requires_confirmation",
+        "is_confirmed": false
+    }
+},
+{
+    "model": "app_user.payment",
+    "pk": 6,
+    "fields": {
+        "user": 2,
+        "payment_date": "2023-07-18T11:57:16.175Z",
+        "paid_course": 3,
+        "amount": "50000.00",
+        "payment_method_id": "pm_1NVG8NEZTYLpMdj950wVcnMc",
+        "payment_intent_id": "pi_3NVCWlEZTYLpMdj90N5ry2DL",
+        "status": "requires_confirmation",
+        "is_confirmed": false
+    }
+},
+{
+    "model": "app_user.payment",
+    "pk": 7,
+    "fields": {
+        "user": 2,
+        "payment_date": "2023-07-18T13:40:51.241Z",
+        "paid_course": 4,
+        "amount": "50000.00",
+        "payment_method_id": "pm_1NVE9yEZTYLpMdj9FD43BDOo",
+        "payment_intent_id": "pi_3NVE90EZTYLpMdj91DBfvqFq",
+        "status": "succeeded",
+        "is_confirmed": true
+    }
+},
+{
+    "model": "app_user.payment",
+    "pk": 8,
+    "fields": {
+        "user": 2,
+        "payment_date": "2023-07-18T15:17:30.617Z",
+        "paid_course": 2,
+        "amount": "50000.00",
+        "payment_method_id": "pm_1NVFg4EZTYLpMdj9qkQG1MLx",
+        "payment_intent_id": "pi_3NVFeYEZTYLpMdj90bjA1fp9",
+        "status": "succeeded",
+        "is_confirmed": true
+    }
+},
+{
+    "model": "app_user.payment",
+    "pk": 9,
+    "fields": {
+        "user": 2,
+        "payment_date": "2023-07-18T15:36:41.870Z",
+        "paid_course": 3,
+        "amount": "50000.00",
+        "payment_method_id": "pm_1NVG6JEZTYLpMdj9RmWAxwQX",
+        "payment_intent_id": "pi_3NVFx7EZTYLpMdj91zSpOyAG",
+        "status": "requires_confirmation",
+        "is_confirmed": false
+    }
+},
+{
+    "model": "app_user.payment",
+    "pk": 10,
+    "fields": {
+        "user": 2,
+        "payment_date": "2023-07-18T15:38:11.673Z",
+        "paid_course": 4,
+        "amount": "50000.00",
+        "payment_method_id": "pm_1NVG0aEZTYLpMdj9YKlwdngF",
+        "payment_intent_id": "pi_3NVFyZEZTYLpMdj90ZaAk3f6",
+        "status": "succeeded",
+        "is_confirmed": true
+    }
+},
+{
+    "model": "app_user.payment",
+    "pk": 11,
+    "fields": {
+        "user": 4,
+        "payment_date": "2023-07-18T18:40:10.836Z",
+        "paid_course": 4,
+        "amount": "50000.00",
+        "payment_method_id": "pm_1NVIpMEZTYLpMdj9ukSgbfQc",
+        "payment_intent_id": "pi_3NVIogEZTYLpMdj90zppc97U",
+        "status": "succeeded",
+        "is_confirmed": true
+    }
+},
+{
+    "model": "app_user.payment",
+    "pk": 12,
+    "fields": {
+        "user": 4,
+        "payment_date": "2023-07-18T19:01:23.105Z",
+        "paid_course": 2,
+        "amount": "50000.00",
+        "payment_method_id": "pm_1NVJTrEZTYLpMdj9HPpfwdKk",
+        "payment_intent_id": "pi_3NVJ9CEZTYLpMdj91EnIu0l2",
+        "status": "succeeded",
+        "is_confirmed": true
     }
 }
 ]

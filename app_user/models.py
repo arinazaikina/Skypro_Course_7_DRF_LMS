@@ -1,9 +1,9 @@
-from typing import List
+from typing import List, Optional
 
 from django.contrib.auth.models import AbstractUser
 from django.db import models
 
-from app_course.models import Course, Lesson
+from app_course.models import Course
 from app_image.models import UserImage
 from .managers import CustomUserManager
 
@@ -48,14 +48,12 @@ class Payment(models.Model):
     user = models.ForeignKey(CustomUser, on_delete=models.CASCADE, related_name='payments', verbose_name='Пользователь')
     payment_date = models.DateTimeField(auto_now_add=True, verbose_name='Дата оплаты')
     paid_course = models.ForeignKey(Course, on_delete=models.SET_NULL, **NULLABLE, verbose_name='Оплаченный курс')
-    paid_lesson = models.ForeignKey(Lesson, on_delete=models.SET_NULL, **NULLABLE, verbose_name='Оплаченный урок')
     amount = models.DecimalField(max_digits=10, decimal_places=2, verbose_name='Сумма оплаты')
-    PAYMENT_METHODS = [
-        ('cash', 'Наличные'),
-        ('transfer', 'Перевод на счет'),
-    ]
-    payment_method = models.CharField(max_length=10, choices=PAYMENT_METHODS, default='transfer',
-                                      verbose_name='Способ оплаты')
+    payment_method_id = models.CharField(max_length=50, blank=True, null=True, verbose_name='ID метода платежа Stripe')
+    payment_intent_id = models.CharField(max_length=255, blank=True, null=True,
+                                         verbose_name='ID намерения платежа Stripe')
+    status = models.CharField(max_length=50, blank=True, null=True, verbose_name='Stripe cтатус платежа')
+    is_confirmed = models.BooleanField(default=False, verbose_name='Подтвержден')
 
     class Meta:
         verbose_name = 'Платеж'
@@ -71,3 +69,20 @@ class Payment(models.Model):
         Возвращает список всех платежей
         """
         return cls.objects.all()
+
+    @classmethod
+    def get_by_payment_intent_id(cls, payment_intent_id: str) -> Optional['Payment']:
+        """
+        Возвращает платеж по идентификатору намерения платежа
+        """
+        try:
+            return cls.objects.get(payment_intent_id=payment_intent_id)
+        except cls.DoesNotExist:
+            return None
+
+    def confirm_payment(self) -> None:
+        """
+        Делает платеж подтвержденным.
+        """
+        self.is_confirmed = True
+        self.save()

@@ -1,4 +1,4 @@
-from typing import List
+from typing import List, Optional
 
 from django.db import models
 
@@ -15,6 +15,7 @@ class Course(models.Model):
     description = models.TextField(verbose_name='Описание')
     created_by = models.ForeignKey('app_user.CustomUser', on_delete=models.CASCADE,
                                    verbose_name='Создано пользователем')
+    cost = models.DecimalField(max_digits=10, decimal_places=2, default=50000, verbose_name='Стоимость курса')
 
     class Meta:
         verbose_name = 'Курс'
@@ -30,6 +31,16 @@ class Course(models.Model):
         Возвращает список всех курсов
         """
         return cls.objects.all()
+
+    @classmethod
+    def get_by_id(cls, course_id: int) -> Optional['Course']:
+        """
+        Возвращает курс по его идентификатору
+        """
+        try:
+            return cls.objects.get(id=course_id)
+        except cls.DoesNotExist:
+            return None
 
 
 class Lesson(models.Model):

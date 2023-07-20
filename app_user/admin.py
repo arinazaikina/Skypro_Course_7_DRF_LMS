@@ -46,5 +46,5 @@ class CustomUserAdmin(UserAdmin):
 class PaymentAdmin(admin.ModelAdmin):
 
     model = Payment
-    list_display = ['pk', 'user', 'payment_date', 'paid_course', 'paid_lesson', 'amount', 'payment_method']
+    list_display = ['pk', 'user', 'payment_date', 'paid_course', 'amount', 'is_confirmed']
     list_display_links = ['pk']

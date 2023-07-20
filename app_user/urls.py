@@ -5,8 +5,11 @@ from .views import (
     UserRegisterView,
     UserListAPIView,
     UserRetrieveUpdateDestroyAPIView,
-    PaymentListCreateView,
-    PaymentRetrieveView
+    PaymentListView,
+    PaymentRetrieveView,
+    PaymentIntentCreateView,
+    PaymentMethodCreateView,
+    PaymentIntentConfirmView
 )
 
 urlpatterns = [
@@ -15,6 +18,9 @@ urlpatterns = [
     path('register/', UserRegisterView.as_view(), name='register'),
     path('users/', UserListAPIView.as_view(), name='user_list'),
     path('users/<int:pk>/', UserRetrieveUpdateDestroyAPIView.as_view(), name='user_detail'),
-    path('payments/', PaymentListCreateView.as_view(), name='payment-list-create'),
+    path('payments/', PaymentListView.as_view(), name='payment_list'),
     path('payments/<int:pk>/', PaymentRetrieveView.as_view(), name='payment_detail'),
+    path('payments/create/', PaymentIntentCreateView.as_view(), name='payment_create'),
+    path('payments/method/create', PaymentMethodCreateView.as_view(), name='payment_method_create'),
+    path('payments/confirm/', PaymentIntentConfirmView.as_view(), name='payments_confirm'),
 ]

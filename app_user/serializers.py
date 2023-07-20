@@ -3,10 +3,12 @@ from typing import Dict, Any
 from django.contrib.auth.password_validation import validate_password
 from rest_framework import serializers
 
+from app_course.models import Course
 from app_image.models import UserImage
 from app_image.serializers import UserImageSerializer
 from .models import CustomUser, Payment
 from .validators import PhoneValidator
+
 
 class PaymentSerializer(serializers.ModelSerializer):
     """
@@ -14,35 +16,21 @@ class PaymentSerializer(serializers.ModelSerializer):
 
     Поля:
     - id: Целочисленный идентификатор платежа.
+    - payment_intent_id: ID намерения платежа в сервисе Stripe
+    - payment_method_id: ID метода платежа в сервисе Stripe
     - user: Идентификатор и email пользователя, совершившего платеж.
     - payment_date: Дата платежа.
     - paid_course: Оплаченный курс.
-    - paid_lesson: Оплаченный урок.
     - amount: Сумма платежа.
-    - payment_method: Метод оплаты.
-
-    Настроена проверка, что в платеже обязательно должен быть указан либо курс, либо урок.
+    - status: Статус платежа в сервисе Stripe.
+    - is_confirmed: Платеж подтвержден
     """
     user = serializers.SerializerMethodField()
 
     class Meta:
         model = Payment
-        fields = ['id', 'user', 'payment_date', 'paid_course', 'paid_lesson', 'amount', 'payment_method']
-
-    def validate(self, data: Dict[str, Any]) -> Dict[str, Any]:
-        """
-        Проверяет валидность данных платежа.
-        Если не указаны ни 'paid_course', ни 'paid_lesson' выкидывается исключение.
-        В противном случае возвращает словарь с проверенными данными платежа.
-
-        :param data: Словарь с данными платежа.
-        """
-        paid_course = data.get('paid_course')
-        paid_lesson = data.get('paid_lesson')
-
-        if not (paid_course or paid_lesson):
-            raise serializers.ValidationError("Either 'paid_course' or 'paid_lesson' must be provided.")
-        return data
+        fields = ['id', 'payment_intent_id', 'payment_method_id', 'user', 'payment_date', 'paid_course', 'amount',
+                  'status', 'is_confirmed']
 
     @staticmethod
     def get_user(instance: Payment) -> Dict[str, Any]:
@@ -170,3 +158,81 @@ class RegisterUserSerializer(serializers.ModelSerializer):
         user.save()
 
         return user
+
+
+class PaymentIntentCreateSerializer(serializers.Serializer):
+    """
+    Сериализатор для создания платежного намерения.
+
+    Поля:
+    - course_id: ID курса, который необходимо оплатить.
+    """
+    course_id: int = serializers.IntegerField()
+
+    @staticmethod
+    def validate_course_id(value: int) -> int:
+        """
+        Проверяет, существует ли курс с указанным ID.
+        Если курс с указанным ID существует, то возвращает ID курса.
+
+        :param value: ID курса
+        """
+        course = Course.get_by_id(course_id=value)
+        if not course:
+            raise serializers.ValidationError(f'Курс с ID {value} не найден.')
+        return value
+
+
+class PaymentMethodCreateSerializer(serializers.Serializer):
+    """
+    Сериализатор для создания платежного метода.
+
+    Поля:
+    - payment_intent_id: ID платежного намерения в системе Stripe.
+    - payment_token: токен платежного метода в системе Stripe.
+    """
+    payment_intent_id: str = serializers.CharField(max_length=255)
+    payment_token: str = serializers.CharField(max_length=255)
+
+    def validate(self, data: Dict[str, str]) -> Dict[str, str]:
+        """
+        Проверяет существование платежа с указанным ID намерения платежа.
+        Проверяет не является ли этот платеж уже подтвержденным.
+        При успешной валидации возвращает словарь с данными.
+        :param data: Входные данные.
+        """
+        payment_intent_id = data.get('payment_intent_id')
+        payment = Payment.get_by_payment_intent_id(payment_intent_id)
+        if payment is None:
+            raise serializers.ValidationError(f"Платеж с ID {payment_intent_id} не найден")
+        if payment.is_confirmed:
+            raise serializers.ValidationError(f"Платеж с ID {payment_intent_id} уже подтвержден")
+        return data
+
+
+class PaymentIntentConfirmSerializer(serializers.Serializer):
+    """
+    Сериализатор для подтверждения платежа.
+
+    Поля:
+    - payment_intent_id: ID платежного намерения в системе Stripe.
+    """
+    payment_intent_id = serializers.CharField(max_length=255)
+
+    def validate(self, data: Dict[str, str]) -> Dict[str, str]:
+        """
+        Проверяет существование платежа с указанным ID намерения платежа.
+        Проверяет привязан ли к платежу способ оплаты.
+        Проверяет не является ли этот платеж уже подтвержденным.
+        При успешной валидации возвращает словарь с данными.
+        :param data: Входные данные.
+        """
+        payment_intent_id = data.get('payment_intent_id')
+        payment = Payment.get_by_payment_intent_id(payment_intent_id)
+        if payment is None:
+            raise serializers.ValidationError(f"Платеж с ID {payment_intent_id} не найден")
+        if payment.payment_method_id is None:
+            raise serializers.ValidationError(f"К платежу с ID {payment_intent_id} не привязан ни один способ оплаты")
+        if payment.is_confirmed:
+            raise serializers.ValidationError(f"Платеж с ID {payment_intent_id} уже подтвержден")
+        return data
