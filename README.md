@@ -13,7 +13,7 @@ cd Skypro_Course_7_DRF_LMS
 ```
 4. Переключить ветку
 ```bash
-git checkout 26.1
+git checkout 26.2
 ```
 
 ## Шаг 2. Установка зависимостей
