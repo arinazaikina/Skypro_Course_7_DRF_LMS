@@ -1,5 +1,57 @@
 [
 {
+    "model": "admin.logentry",
+    "pk": 2,
+    "fields": {
+        "action_time": "2023-07-20T15:50:42.990Z",
+        "user": 5,
+        "content_type": 15,
+        "object_id": "2",
+        "object_repr": "каждые минут",
+        "action_flag": 1,
+        "change_message": "[{\"added\": {}}]"
+    }
+},
+{
+    "model": "admin.logentry",
+    "pk": 3,
+    "fields": {
+        "action_time": "2023-07-20T15:50:52.962Z",
+        "user": 5,
+        "content_type": 15,
+        "object_id": "2",
+        "object_repr": "каждые 2 минуты",
+        "action_flag": 2,
+        "change_message": "[{\"changed\": {\"fields\": [\"Number of Periods\"]}}]"
+    }
+},
+{
+    "model": "admin.logentry",
+    "pk": 4,
+    "fields": {
+        "action_time": "2023-07-20T15:51:08.193Z",
+        "user": 5,
+        "content_type": 16,
+        "object_id": "1",
+        "object_repr": "Check and Update Payment Status: каждые 2 минуты",
+        "action_flag": 2,
+        "change_message": "[{\"changed\": {\"fields\": [\"Interval Schedule\"]}}]"
+    }
+},
+{
+    "model": "admin.logentry",
+    "pk": 5,
+    "fields": {
+        "action_time": "2023-07-20T18:25:50.242Z",
+        "user": 5,
+        "content_type": 16,
+        "object_id": "1",
+        "object_repr": "Check and Update Payment Status: каждые 5 секунды",
+        "action_flag": 2,
+        "change_message": "[{\"changed\": {\"fields\": [\"Interval Schedule\"]}}]"
+    }
+},
+{
     "model": "sessions.session",
     "pk": "pb0wmejmkuculcxsf5d8d1ekwdig0crb",
     "fields": {
@@ -13,6 +65,14 @@
     "fields": {
         "every": 5,
         "period": "seconds"
+    }
+},
+{
+    "model": "django_celery_beat.intervalschedule",
+    "pk": 2,
+    "fields": {
+        "every": 2,
+        "period": "minutes"
     }
 },
 {
@@ -31,7 +91,7 @@
     "model": "django_celery_beat.periodictasks",
     "pk": 1,
     "fields": {
-        "last_update": "2023-07-18T19:22:08.656Z"
+        "last_update": "2023-07-20T18:26:04.088Z"
     }
 },
 {
@@ -54,11 +114,11 @@
         "expires": null,
         "expire_seconds": null,
         "one_off": false,
-        "start_time": "2023-07-18T18:13:07.385Z",
+        "start_time": "2023-07-18T18:13:07Z",
         "enabled": true,
-        "last_run_at": "2023-07-18T19:23:23.832Z",
-        "total_run_count": 68,
-        "date_changed": "2023-07-18T19:23:27.999Z",
+        "last_run_at": "2023-07-20T18:26:49.232Z",
+        "total_run_count": 123,
+        "date_changed": "2023-07-20T18:26:51.327Z",
         "description": ""
     }
 },
@@ -86,7 +146,7 @@
         "enabled": true,
         "last_run_at": null,
         "total_run_count": 0,
-        "date_changed": "2023-07-18T19:22:08.656Z",
+        "date_changed": "2023-07-20T18:26:04.087Z",
         "description": ""
     }
 },
@@ -145,9 +205,10 @@
     "fields": {
         "name": "Python-разработчик",
         "preview": 1,
-        "description": "Python просто выучить, даже если вы никогда не программировали. Во время обучения вам будет помогать эксперт-куратор. Вы разработаете 3 проекта для портфолио, а Центр карьеры поможет найти работу Python-разработчиком.",
+        "description": "Очень хороший курс",
         "created_by": 2,
-        "cost": "50000.00"
+        "cost": "50000.00",
+        "updated_at": "2023-07-20T18:26:27.216Z"
     }
 },
 {
@@ -158,7 +219,8 @@
         "preview": 1,
         "description": "Вы с нуля научитесь программировать на языке Java и создавать веб-приложения на фреймворке Spring. За полгода получите фундаментальные навыки и соберёте портфолио, а мы поможем найти работу.",
         "created_by": 2,
-        "cost": "50000.00"
+        "cost": "50000.00",
+        "updated_at": "2023-07-20T15:29:01.307Z"
     }
 },
 {
@@ -169,7 +231,8 @@
         "preview": 3,
         "description": "string",
         "created_by": 4,
-        "cost": "50000.00"
+        "cost": "50000.00",
+        "updated_at": "2023-07-20T15:29:01.307Z"
     }
 },
 {
@@ -177,11 +240,12 @@
     "pk": 1,
     "fields": {
         "course": 2,
-        "name": "Знакомимся с Python",
+        "name": "Знакомство с Python",
         "description": "Знакомимся с Python",
         "preview": 2,
         "video_url": "https://www.youtube.com/watch?v=kqtD5dpn9C8",
-        "created_by": 2
+        "created_by": 2,
+        "updated_at": "2023-07-20T18:13:35.157Z"
     }
 },
 {
@@ -193,7 +257,8 @@
         "description": "Тестирование мобильного приложения",
         "preview": 1,
         "video_url": "https://www.youtube.com/watch?v=PIupBjDxeps",
-        "created_by": 4
+        "created_by": 4,
+        "updated_at": "2023-07-20T15:29:01.345Z"
     }
 },
 {
@@ -205,7 +270,8 @@
         "description": "Автоматизируем процесс тестирования",
         "preview": 1,
         "video_url": "https://www.youtube.com/watch?v=1B6oEy3x6VI",
-        "created_by": 2
+        "created_by": 2,
+        "updated_at": "2023-07-20T15:29:01.345Z"
     }
 },
 {
@@ -213,11 +279,12 @@
     "pk": 5,
     "fields": {
         "course": 2,
-        "name": "Делаю игру Змейка на Python. Двенадцатый дан.",
+        "name": "Делаю игру Змейка на Python",
         "description": "Делаю игру Змейка на Python. Двенадцатый дан.",
         "preview": 1,
         "video_url": "https://www.youtube.com/watch?v=FTtEF1KDBXo",
-        "created_by": 2
+        "created_by": 2,
+        "updated_at": "2023-07-20T16:46:22.158Z"
     }
 },
 {
@@ -225,6 +292,15 @@
     "pk": 10,
     "fields": {
         "user": 2,
+        "course": 2,
+        "subscribed": true
+    }
+},
+{
+    "model": "app_course.coursesubscription",
+    "pk": 11,
+    "fields": {
+        "user": 4,
         "course": 2,
         "subscribed": true
     }
@@ -241,7 +317,7 @@
         "is_staff": false,
         "is_active": true,
         "date_joined": "2023-07-10T17:10:36.486Z",
-        "email": "arina@mail.com",
+        "email": "sav2405@gmail.com",
         "avatar": 1,
         "phone": "+7(995)915-54-18",
         "city": "Spb",
@@ -281,7 +357,7 @@
         "is_staff": false,
         "is_active": true,
         "date_joined": "2023-07-10T19:20:14.009Z",
-        "email": "max@mail.com",
+        "email": "i@azaikina.ru",
         "avatar": 1,
         "phone": "+7(949)589-95-96",
         "city": "Tomsk",
@@ -473,6 +549,20 @@
         "amount": "50000.00",
         "payment_method_id": "pm_1NVJTrEZTYLpMdj9HPpfwdKk",
         "payment_intent_id": "pi_3NVJ9CEZTYLpMdj91EnIu0l2",
+        "status": "succeeded",
+        "is_confirmed": true
+    }
+},
+{
+    "model": "app_user.payment",
+    "pk": 13,
+    "fields": {
+        "user": 4,
+        "payment_date": "2023-07-18T19:43:51.245Z",
+        "paid_course": 3,
+        "amount": "50000.00",
+        "payment_method_id": "pm_1NVJp4EZTYLpMdj9z2l0ZeRr",
+        "payment_intent_id": "pi_3NVJoIEZTYLpMdj91xvzrAdf",
         "status": "succeeded",
         "is_confirmed": true
     }

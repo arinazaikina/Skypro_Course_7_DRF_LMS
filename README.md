@@ -146,8 +146,8 @@ python manage.py runserver
 
 - Админ: admin@mail.ru, пароль 0000
 - Модератор: moderator@mail.com, пароль qwerty123!
-- Пользователь arina@mail.com, пароль qwerty123!
-- Пользователь max@mail.com, пароль qwerty123!
+- Пользователь sav2405@gmail.com, пароль qwerty123!
+- Пользователь i@azaikina.ru, пароль qwerty123!
 
 4. Некоторые ручки
 - Для регистрации пользователя - /register/
