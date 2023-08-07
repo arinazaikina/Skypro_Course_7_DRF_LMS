@@ -16,6 +16,7 @@ class Course(models.Model):
     created_by = models.ForeignKey('app_user.CustomUser', on_delete=models.CASCADE,
                                    verbose_name='Создано пользователем')
     cost = models.DecimalField(max_digits=10, decimal_places=2, default=50000, verbose_name='Стоимость курса')
+    updated_at = models.DateTimeField(auto_now=True, verbose_name='Время обновления')
 
     class Meta:
         verbose_name = 'Курс'
@@ -55,6 +56,7 @@ class Lesson(models.Model):
     video_url = models.URLField(verbose_name='Ссылка на видео')
     created_by = models.ForeignKey('app_user.CustomUser', on_delete=models.CASCADE,
                                    verbose_name='Создано пользователем')
+    updated_at = models.DateTimeField(auto_now=True, verbose_name='Время обновления')
 
     class Meta:
         verbose_name = "Урок"
@@ -71,13 +73,23 @@ class Lesson(models.Model):
         """
         return cls.objects.all()
 
+    @classmethod
+    def get_by_id(cls, lesson_id: int) -> Optional['Lesson']:
+        """
+        Возвращает урок по его идентификатору
+        """
+        try:
+            return cls.objects.get(id=lesson_id)
+        except cls.DoesNotExist:
+            return None
+
 
 class CourseSubscription(models.Model):
     """
     Модель, описывающая подписку пользователя на курс.
     """
     user = models.ForeignKey('app_user.CustomUser', on_delete=models.CASCADE, verbose_name='Пользователь')
-    course = models.ForeignKey(Course, on_delete=models.CASCADE, verbose_name='Курс')
+    course = models.ForeignKey(Course, on_delete=models.CASCADE, related_name='subscriptions', verbose_name='Курс')
     subscribed = models.BooleanField(default=False, verbose_name='Статус подписки')
 
     class Meta:

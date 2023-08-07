@@ -10,14 +10,15 @@ def create_periodic_task() -> None:
     """
     from django_celery_beat.models import IntervalSchedule, PeriodicTask
     interval, _ = IntervalSchedule.objects.get_or_create(every=5, period=IntervalSchedule.SECONDS)
-    task_name = 'app_user.tasks.check_and_update_payment_status'
+    task_name = 'app_user.tasks.py.check_and_update_payment_status'
+    task_description = 'Check and Update Payment Status'
 
-    existing_task = PeriodicTask.objects.filter(task=task_name).first()
+    existing_task = PeriodicTask.objects.filter(name=task_description).first()
 
     if not existing_task:
         task = PeriodicTask.objects.create(
             interval=interval,
-            name='Check and Update Payment Status',
+            name=task_description,
             task=task_name,
             enabled=True,
             start_time=datetime.now() + timedelta(seconds=5)

@@ -1,3 +1,5 @@
+import logging
+from datetime import datetime
 from typing import Dict, Any
 
 from django.http import Http404
@@ -16,6 +18,9 @@ from .serializers import (
     SubscriptionCreateSerializer,
     SubscriptionDeleteSerializer
 )
+from .tasks import was_updated_recently, send_course_update_notifications, send_lesson_update_notifications
+
+logger = logging.getLogger(__name__)
 
 
 class CourseViewSet(viewsets.ModelViewSet):
@@ -75,6 +80,19 @@ class CourseViewSet(viewsets.ModelViewSet):
         context['request'] = self.request
         return context
 
+    def perform_update(self, serializer: Serializer) -> None:
+        """
+        Обновляет объект курса и отправляет уведомление об обновлении подписчикам курса,
+        если после последнего обновления курса прошло 60 секунд и больше.
+
+        :param serializer: Сериализатор для сохранения объекта.
+        """
+        instance = self.get_object()
+        last_course_update = instance.updated_at
+        instance = serializer.save()
+        if not was_updated_recently(last_course_update):
+            send_course_update_notifications.delay(instance.id)
+
 
 class LessonListCreateAPIView(generics.ListCreateAPIView):
     queryset = Lesson.get_all_lessons()
@@ -128,6 +146,22 @@ class LessonRetrieveUpdateDestroyAPIView(generics.RetrieveUpdateDestroyAPIView):
     queryset = Lesson.get_all_lessons()
     serializer_class = LessonSerializer
     permission_classes = [IsAuthenticated, CustomPermission]
+
+    def perform_update(self, serializer: Serializer) -> None:
+        """
+        Обновляет объект урока и отправляет уведомление подписчикам курса, в который
+        входит этот урок, если после последнего обновления курса прошло 60 секунд и больше.
+        При обновлении урока, также обновляется и время последнего обновления курса.
+
+        :param serializer: Сериализатор для сохранения объекта.
+        """
+        instance = self.get_object()
+        last_course_update = instance.course.updated_at
+        instance = serializer.save()
+        instance.course.update_at = datetime.now()
+        instance.course.save()
+        if not was_updated_recently(last_course_update):
+            send_lesson_update_notifications.delay(instance.id)
 
 
 class SubscriptionCreateView(generics.CreateAPIView):
