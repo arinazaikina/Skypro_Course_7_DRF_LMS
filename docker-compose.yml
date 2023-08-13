@@ -1,0 +1,89 @@
+version: '3.10'
+
+networks:
+  lms_network:
+    driver: bridge
+
+services:
+  db:
+    container_name: db
+    env_file:
+      - ./.env
+    image: postgres:15
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+      - ./postgresql.conf:/etc/postgresql/postgresql.conf
+    command: postgres -c config_file=/etc/postgresql/postgresql.conf
+    healthcheck:
+      test: [ 'CMD-SHELL', 'pg_isready' ]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+    networks:
+        - lms_network
+
+  redis:
+    image: redis
+    container_name: redis
+    command: redis-server --save 20 1 --loglevel warning
+    volumes:
+      - .data.cache:/data
+    networks:
+      - lms_network
+
+  backend:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: backend
+    depends_on:
+      db:
+        condition: service_healthy
+      redis:
+        condition: service_started
+    env_file:
+      - ./.env
+    ports:
+      - "8000:8000"
+    volumes:
+      - .:/app
+    command: >
+      bash -c "python  manage.py collectstatic --noinput
+      && python manage.py makemigrations
+      && python manage.py migrate
+      && python manage.py loaddata data
+      && python manage.py create_periodic_task
+      && gunicorn config.wsgi:application --bind 0.0.0.0:8000"
+    networks:
+      - lms_network
+
+  celery:
+    container_name: celery
+    build: .
+    command: >
+      bash -c "celery -A config.celery worker --loglevel=info"
+    volumes:
+      - .:/app
+    links:
+      - redis
+    depends_on:
+      - db
+      - backend
+    networks:
+      - lms_network
+
+  celery-beat:
+    container_name: celery-beat
+    build: .
+    command: >
+      bash -c "sleep 30 && celery -A config.celery beat --loglevel=info"
+    volumes:
+      - .:/app
+    depends_on:
+      - backend
+      - celery
+    networks:
+      - lms_network
+
+volumes:
+  postgres_data:
