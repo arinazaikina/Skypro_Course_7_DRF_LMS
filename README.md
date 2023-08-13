@@ -46,7 +46,7 @@ DJANGO_SERVER_URL=http://backend:8000
 8. Запустить проект с помощью Docker, используя следующую команду:
 
 ```bash
-docker-compose build --no-cache && docker-compose up -d
+docker-compose build --no-cache && docker-compose up
 ```
 
 ## Доступ к Swagger UI
